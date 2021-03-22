@@ -19,7 +19,6 @@ namespace practice_authentication_backend.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("/getallblogs")]
         public IEnumerable<PostModel> GetAllBlogs()
         {

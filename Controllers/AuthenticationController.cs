@@ -54,7 +54,11 @@ namespace practice_CMS_backend.Controllers
                     expiration = token.ValidTo
                 });
             }
-            return Unauthorized();
+            return Unauthorized(new Response
+            {
+                Status = "Error",
+                Message = "Incorrect username or password"
+            });
         }
 
         [HttpPost]

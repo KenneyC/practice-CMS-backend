@@ -34,6 +34,14 @@ namespace practice_CMS_backend
             services.AddScoped<IBlogDataAccessProvider, BlogDataAccessProvider>();
             services.AddScoped<IUserDataAccessProvider, UserAccessDataProvider>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                    builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
+
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<CMSDbContext>()
                 .AddDefaultTokenProviders();
@@ -79,6 +87,8 @@ namespace practice_CMS_backend
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
 
